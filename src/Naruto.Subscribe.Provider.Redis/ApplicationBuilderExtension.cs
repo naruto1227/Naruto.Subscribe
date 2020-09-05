@@ -14,11 +14,11 @@ namespace Naruto.Subscribe.Extension
     public static class ApplicationBuilderExtension
     {
         /// <summary>
-        /// 启用 订阅
+        /// 启用redis 订阅功能
         /// </summary>
         /// <param name="applicationBuilder"></param>
         /// <returns></returns>
-        public static async Task EnableSubscribe(this IApplicationBuilder applicationBuilder)
+        public static async Task EnableRedisSubscribe(this IApplicationBuilder applicationBuilder)
         {
             //获取订阅类型的工厂
             //var typeFactory = applicationBuilder.ApplicationServices.GetRequiredService<ISubscribeTypeFactory>();
@@ -27,19 +27,14 @@ namespace Naruto.Subscribe.Extension
 
             if (names != null && names.Count() > 0)
             {
-                //获取redis
-                var redis = applicationBuilder.ApplicationServices.GetRequiredService<IRedisRepository>();
-                //订阅处理接口
-                var subscribeHandler = applicationBuilder.ApplicationServices.GetRequiredService<ISubscribeHandler>();
+                //订阅事件接口
+                var subscribeEvent = applicationBuilder.ApplicationServices.GetRequiredService<ISubscribeEvent>();
                 foreach (var item in names)
                 {
-                    await redis.Subscribe.SubscribeAsync(item, async (channel, msg) =>
-                     {
-                         await subscribeHandler.Handler(channel, msg);
-                     });
+                    //处理订阅信息
+                    await subscribeEvent.SubscribeAsync(item);
                 }
             }
         }
     }
-
 }

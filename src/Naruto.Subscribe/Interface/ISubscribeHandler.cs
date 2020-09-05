@@ -10,6 +10,12 @@ namespace Naruto.Subscribe.Interface
     /// </summary>
     public interface ISubscribeHandler
     {
-        Task Handler(string channel, string msg);
+        /// <summary>
+        /// 处理订阅消息
+        /// </summary>
+        /// <param name="subscribeName">渠道 订阅名称</param>
+        /// <param name="msg">消息内容</param>
+        /// <returns></returns>
+        Task Handler(string subscribeName, string msg);
     }
 }

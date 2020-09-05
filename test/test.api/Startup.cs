@@ -8,6 +8,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Naruto.Subscribe.Extension;
+using Naruto.Subscribe.Provider.Redis;
 
 namespace test.api
 {
@@ -22,6 +23,7 @@ namespace test.api
                 a.Connection = new string[] { "127.0.0.1" };
             });
             services.AddSubscribeServices(typeof(Startup).Assembly);
+            services.AddRedisSubscribe();
 
         }
 
@@ -32,7 +34,7 @@ namespace test.api
             {
                 app.UseDeveloperExceptionPage();
             }
-            await app.EnableSubscribe();
+            await app.EnableRedisSubscribe();
             app.UseRouting();
 
             app.UseEndpoints(endpoints =>
