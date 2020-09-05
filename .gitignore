@@ -1,0 +1,6 @@
+#过滤
+.vs/
+/*/*/bin/
+/*/*/obj/
+*/Properties/
+*.log
