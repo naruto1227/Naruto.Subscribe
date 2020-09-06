@@ -9,8 +9,8 @@
 
 
 #### 安装教程
-1.安装 <b>Naruto.Subscribe</b> 核心包
-2.安装 <b>Naruto.Subscribe.Provider.Redis</b> ，基于redis的发布订阅
+1. 安装 <b>Naruto.Subscribe</b> 核心包
+2. 安装 <b>Naruto.Subscribe.Provider.Redis</b> ，基于redis的发布订阅
 
 #### 使用说明
 
