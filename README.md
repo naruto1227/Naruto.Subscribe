@@ -16,7 +16,7 @@
 1.  当前框架 默认使用的redis的发布订阅，更多mq的订阅正在接入中
 2.  如果需要实现自己的订阅方式，需要实现接口 <b>INarutoPublish</b>发布接口，和<b>ISubscribeEvent</b>订阅接口
 3. 书写自己的订阅业务的时候，需要继承<b>ISubscribe</b>接口,继承此接口的对象自动会注入成单例对象,可以使用DI的功能
-4. <img src='https://gitee.com/haiboi/naruto.-subscribe/blob/master/subscribe.png'></img>
+4. ![subscribe](/subscribe.png)
 5. 给需要订阅的方法标记<b>Subscribe</b>特性
 
 #### 参与贡献 
