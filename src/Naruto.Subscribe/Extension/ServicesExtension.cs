@@ -1,4 +1,5 @@
-﻿using Naruto.Subscribe.Extension;
+﻿using Microsoft.Extensions.DependencyInjection.Extensions;
+using Naruto.Subscribe.Extension;
 using Naruto.Subscribe.Interface;
 using Naruto.Subscribe.Internal;
 using System;
@@ -19,7 +20,6 @@ namespace Microsoft.Extensions.DependencyInjection
         public static IServiceCollection AddSubscribeServices(this IServiceCollection services, params Assembly[] assemblies)
         {
             //注入服务
-            // services.AddSingleton<ISubscribeTypeFactory, SubscribeTypeFactory>();
             services.AddSingleton(typeof(DynamicMethodExpression<>));
             services.AddSingleton<ISubscribeHandler, SubscribeHandler>();
             //设置订阅信息
@@ -32,7 +32,6 @@ namespace Microsoft.Extensions.DependencyInjection
         /// </summary>
         private static void SetSubscribe(this IServiceCollection services, params Assembly[] assemblies)
         {
-            //ISubscribeTypeFactory subscribeTypeFactory = services.BuildServiceProvider().GetRequiredService<ISubscribeTypeFactory>();
             if (assemblies != null && assemblies.Count() > 0)
             {
                 foreach (var item in assemblies)
@@ -46,7 +45,7 @@ namespace Microsoft.Extensions.DependencyInjection
                             //将订阅的信息 存储到工厂
                             SubscribeTypeFactory.Set(subscribeType);
                             //注入服务
-                            services.AddSingleton(subscribeType.ServiceType);
+                            services.TryAddSingleton(subscribeType.ServiceType);
                         }
                     }
                 }

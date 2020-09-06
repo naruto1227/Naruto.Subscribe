@@ -8,7 +8,7 @@ namespace Naruto.Subscribe
     /// 订阅的名称
     /// </summary>
     [AttributeUsage(AttributeTargets.Method)]
-    public class SubscribeNameAttribute : Attribute
+    public class SubscribeAttribute : Attribute
     {
         public string Name { get; set; }
     }

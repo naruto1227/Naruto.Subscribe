@@ -6,6 +6,8 @@ using System.Threading.Tasks;
 namespace Naruto.Subscribe.Interface
 {
     /// <summary>
+    /// 张海波
+    /// 2020-09-06
     /// 订阅的处理接口
     /// </summary>
     public interface ISubscribeHandler
@@ -16,6 +18,6 @@ namespace Naruto.Subscribe.Interface
         /// <param name="subscribeName">渠道 订阅名称</param>
         /// <param name="msg">消息内容</param>
         /// <returns></returns>
-        Task Handler(string subscribeName, string msg);
+        Task HandlerAsync(string subscribeName, string msg);
     }
 }

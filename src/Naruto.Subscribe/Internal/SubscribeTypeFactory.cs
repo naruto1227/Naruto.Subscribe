@@ -8,7 +8,7 @@ using System.Text;
 
 namespace Naruto.Subscribe.Internal
 {
-    public static class SubscribeTypeFactory
+    internal static class SubscribeTypeFactory
     {
         private static readonly ConcurrentDictionary<string, BaseSubscribeTypeModel> data;
 

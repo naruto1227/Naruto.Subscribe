@@ -18,6 +18,7 @@ namespace Naruto.Subscribe.Provider.Redis
         public static IServiceCollection AddRedisSubscribe(this IServiceCollection services)
         {
             services.TryAddSingleton<ISubscribeEvent, RedisSubscribeEvent>();
+            services.TryAddSingleton<INarutoPublish, RedisPublishProvider>();
             return services;
         }
     }

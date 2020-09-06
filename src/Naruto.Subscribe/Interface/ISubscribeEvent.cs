@@ -6,6 +6,8 @@ using System.Threading.Tasks;
 namespace Naruto.Subscribe.Interface
 {
     /// <summary>
+    /// 张海波
+    /// 2020-09-06
     /// 订阅事件的处理
     /// </summary>
     public interface ISubscribeEvent

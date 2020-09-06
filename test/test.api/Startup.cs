@@ -8,6 +8,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Naruto.Subscribe.Extension;
+using Naruto.Subscribe.Interface;
 using Naruto.Subscribe.Provider.Redis;
 
 namespace test.api
@@ -28,22 +29,40 @@ namespace test.api
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public async void Configure(IApplicationBuilder app, IWebHostEnvironment env)
+        public  async void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
             }
-            await app.EnableRedisSubscribe();
+          
             app.UseRouting();
 
-            app.UseEndpoints(endpoints =>
+            app.Map(new PathString("/test"), app2 =>
             {
-                endpoints.MapGet("/", async context =>
+                app2.Run(async content =>
                 {
-                    await context.Response.WriteAsync("Hello World!");
+                    var sr = app.ApplicationServices.GetRequiredService<INarutoPublish>();
+                    await sr.PublishAsync("test");
                 });
             });
+
+            app.Map(new PathString("/test2"), app2 =>
+            {
+                app2.Run(async content =>
+                {
+                    var sr = app.ApplicationServices.GetRequiredService<INarutoPublish>();
+                    await sr.PublishAsync("test2", new testDTO
+                    {
+                        id = "asdad"
+                    });
+                });
+            });
+            app.UseEndpoints(endpoints =>
+            {
+            });
+
+            await app.EnableSubscribe();
         }
     }
 }

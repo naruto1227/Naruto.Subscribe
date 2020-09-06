@@ -26,13 +26,13 @@ namespace Naruto.Subscribe.Extension
             var subscribeTypeModels = new List<SubscribeTypeModel>();
             foreach (var itemClassType in types)
             {
-                foreach (var itemMethod in itemClassType.GetMethods().Where(a => a.IsPublic && a.IsDefined(typeof(SubscribeNameAttribute))))
+                foreach (var itemMethod in itemClassType.GetMethods().Where(a => a.IsPublic && a.IsDefined(typeof(SubscribeAttribute))))
                 {
                     subscribeTypeModels.Add(new SubscribeTypeModel
                     {
                         ServiceType = itemClassType,
                         MethodName = itemMethod.Name,
-                        SubscribeName = itemMethod.GetCustomAttribute<SubscribeNameAttribute>().Name
+                        SubscribeName = itemMethod.GetCustomAttribute<SubscribeAttribute>().Name
                     });
                 }
             }
