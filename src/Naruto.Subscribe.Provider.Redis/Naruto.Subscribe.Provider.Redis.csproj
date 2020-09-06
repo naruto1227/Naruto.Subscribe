@@ -1,7 +1,12 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <TargetFramework>netcoreapp3.1</TargetFramework>
+    <Authors>zhanghaibo</Authors>
+    <Company>zhanghaibo</Company>
+    <Description>基于redis的发布订阅</Description>
+    <PackageProjectUrl>https://gitee.com/haiboi/naruto.-subscribe</PackageProjectUrl>
+    <RepositoryUrl>https://gitee.com/haiboi/naruto.-subscribe</RepositoryUrl>
   </PropertyGroup>
 
   <ItemGroup>

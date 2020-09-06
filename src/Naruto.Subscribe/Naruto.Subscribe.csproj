@@ -2,6 +2,10 @@
 
   <PropertyGroup>
     <TargetFramework>netcoreapp3.1</TargetFramework>
+    <Authors>zhanghaibo</Authors>
+    <Description>发布订阅的项目的核心层</Description>
+    <PackageProjectUrl>https://gitee.com/haiboi/naruto.-subscribe</PackageProjectUrl>
+    <RepositoryUrl>https://gitee.com/haiboi/naruto.-subscribe</RepositoryUrl>
   </PropertyGroup>
   <ItemGroup>
     <FrameworkReference Include="Microsoft.AspNetCore.App" />
