@@ -46,10 +46,12 @@ namespace Naruto.Subscribe.Internal
 
             //获取当前执行方法的参数
             var paramters = MethodCache.Get(baseSubscribeType.ServiceType, baseSubscribeType.MethodName).parameterInfos;
+            //获取当前方法是否含有参数
+            var isParamter = paramters != null && paramters.Count() > 0;
             //验证是否是有参的方法，当前默认只支持一个参数
-            var paramtersObject = paramters != null && paramters.Count() > 0 ? msg.ToDeserialized(paramters[0].ParameterType) : null;
+            var paramtersObject = isParamter ? msg.ToDeserialized(paramters[0].ParameterType) : null;
             //操作动态执行方法接口
-            await dynamicMethod.ExecAsync(serviceProvider.GetRequiredService(baseSubscribeType.ServiceType), baseSubscribeType.MethodName, paramters != null && paramters.Count() > 0, paramtersObject);
+            await dynamicMethod.ExecAsync(serviceProvider.GetRequiredService(baseSubscribeType.ServiceType), baseSubscribeType.MethodName, isParamter, isParamter ? paramters[0].ParameterType : null, paramtersObject);
 
             logger.LogInformation("处理完毕接受到的订阅信息");
         }

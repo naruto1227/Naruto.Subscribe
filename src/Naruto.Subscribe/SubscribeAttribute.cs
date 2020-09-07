@@ -1,15 +1,19 @@
-﻿using System;
+﻿using Naruto.Subscribe.Interface;
+using System;
 using System.Collections.Generic;
 using System.Text;
 
 namespace Naruto.Subscribe
 {
     /// <summary>
-    /// 订阅的名称
+    /// 订阅
     /// </summary>
-    [AttributeUsage(AttributeTargets.Method)]
-    public class SubscribeAttribute : Attribute
+
+    public class SubscribeAttribute : SubscribeTopicAttribute
     {
-        public string Name { get; set; }
+        public SubscribeAttribute(string name) : base(name)
+        {
+
+        }
     }
 }

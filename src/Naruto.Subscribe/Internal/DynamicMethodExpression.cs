@@ -20,9 +20,10 @@ namespace Naruto.Subscribe.Internal
         /// <param name="service">服务</param>
         /// <param name="action">方法名</param>
         /// <param name="isParameter">是否是有参数的s</param>
+        /// <param name="parameterType">参数类型</param>
         /// <param name="parameterEntity">参数</param>
         /// <returns></returns>
-        Task ExecAsync(object service, string action, bool isParameter, object parameterEntity);
+        Task ExecAsync(object service, string action, bool isParameter, Type parameterType, object parameterEntity);
     }
     /// <summary>
     /// 张海波
@@ -46,9 +47,11 @@ namespace Naruto.Subscribe.Internal
         /// </summary>
         /// <param name="service"></param>
         /// <param name="action">执行的方法</param>
+        /// <param name="parameterType">参数类型</param>
+        /// <param name="isParameter">是否为有参数的</param>    
         /// <param name="parameterEntity">方法的参数</param>
         /// <returns></returns>
-        public Task ExecAsync(object service, string action, bool isParameter, object parameterEntity)
+        public Task ExecAsync(object service, string action, bool isParameter, Type parameterType, object parameterEntity)
         {
             service.CheckNull();
             action.CheckNullOrEmpty();
@@ -57,7 +60,7 @@ namespace Naruto.Subscribe.Internal
             {
                 return res.DynamicInvoke(service, parameterEntity) as Task;
             }
-            return Create(service, action, isParameter, parameterEntity);
+            return Create(service, action, isParameter, parameterType, parameterEntity);
         }
 
 
@@ -67,14 +70,15 @@ namespace Naruto.Subscribe.Internal
         /// <param name="service">继承NarutoWebSocketService的服务</param>
         /// <param name="action">执行的方法</param>
         /// <param name="isParameter">是否为带参数的方法</param>
+        /// <param name="parameterType">参数类型</param>
         /// <param name="parameterEntity">方法的参数</param>
         /// <returns></returns>
-        private static Task Create(object service, string action, bool isParameter, object parameterEntity)
+        private static Task Create(object service, string action, bool isParameter, Type parameterType, object parameterEntity)
         {
             //定义输入参数
             var p1 = Expression.Parameter(service.GetType(), "service");
             //方法的参数对象
-            var methodParameter = Expression.Parameter(parameterEntity == null ? typeof(object) : parameterEntity.GetType(), "methodParameter");
+            var methodParameter = Expression.Parameter(!isParameter ? typeof(object) : parameterType, "methodParameter");
 
             //动态执行方法
             var methods = MethodCache.Get(service.GetType(), action);
