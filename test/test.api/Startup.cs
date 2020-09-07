@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Naruto.Subscribe;
 using Naruto.Subscribe.Extension;
 using Naruto.Subscribe.Interface;
 using Naruto.Subscribe.Provider.Redis;
@@ -29,13 +30,13 @@ namespace test.api
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public  async void Configure(IApplicationBuilder app, IWebHostEnvironment env)
+        public async void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
             }
-          
+
             app.UseRouting();
 
             app.Map(new PathString("/test"), app2 =>
@@ -63,6 +64,17 @@ namespace test.api
             });
 
             await app.EnableSubscribe();
+
+            NarutoMessageAopEvent.RegisterPreHandlerEvent((subscribeName, msg) =>
+            {
+                msg = "{'id':'jjj'}";
+                Console.WriteLine(subscribeName + msg);
+            });
+
+            NarutoMessageAopEvent.RegisterAfterHandlerEvent((subscribeName, msg) =>
+            {
+                Console.WriteLine(subscribeName + msg);
+            });
         }
     }
 }

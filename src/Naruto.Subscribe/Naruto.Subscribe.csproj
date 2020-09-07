@@ -6,6 +6,8 @@
     <Description>发布订阅的项目的核心层</Description>
     <PackageProjectUrl>https://gitee.com/haiboi/naruto.-subscribe</PackageProjectUrl>
     <RepositoryUrl>https://gitee.com/haiboi/naruto.-subscribe</RepositoryUrl>
+    <AssemblyVersion>1.0.0.0</AssemblyVersion>
+    <Version>1.0.1</Version>
   </PropertyGroup>
   <ItemGroup>
     <FrameworkReference Include="Microsoft.AspNetCore.App" />

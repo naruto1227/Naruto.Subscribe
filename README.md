@@ -19,7 +19,7 @@
 3. 书写自己的订阅业务的时候，需要继承<b>ISubscribe</b>接口,继承此接口的对象自动会注入成单例对象,可以使用DI的功能
 4. ![subscribe](/subscribe.png)
 5. 给需要订阅的方法标记<b>Subscribe</b>特性
-
+6.使用<b>NarutoMessageAopEvent</b>，可以处理消息发送前后的aop事件
 #### 参与贡献 
 
 1.  Fork 本仓库

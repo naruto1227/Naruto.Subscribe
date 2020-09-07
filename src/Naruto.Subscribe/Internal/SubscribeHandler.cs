@@ -50,8 +50,15 @@ namespace Naruto.Subscribe.Internal
             var isParamter = paramters != null && paramters.Count() > 0;
             //验证是否是有参的方法，当前默认只支持一个参数
             var paramtersObject = isParamter ? msg.ToDeserialized(paramters[0].ParameterType) : null;
+
+            //消息处理前的aop事件
+            NarutoMessageAopEvent.PreHandler?.Invoke(subscribeName, msg);
+
             //操作动态执行方法接口
             await dynamicMethod.ExecAsync(serviceProvider.GetRequiredService(baseSubscribeType.ServiceType), baseSubscribeType.MethodName, isParamter, isParamter ? paramters[0].ParameterType : null, paramtersObject);
+
+            //消息处理后的aop事件
+            NarutoMessageAopEvent.AfterHandler?.Invoke(subscribeName, msg);
 
             logger.LogInformation("处理完毕接受到的订阅信息");
         }

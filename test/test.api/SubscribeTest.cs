@@ -15,12 +15,12 @@ namespace test.api
         {
             logger = _logger;
         }
-        [Subscribe(Name = "test")]
+        [Subscribe("test")]
         public async Task A()
         {
             logger.LogInformation("A");
         }
-        [Subscribe(Name = "test2")]
+        [Subscribe("test2")]
         public async Task B(testDTO testDTO)
         {
 
