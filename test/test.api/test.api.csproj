@@ -12,7 +12,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\src\Naruto.Subscribe.Provider.Redis\Naruto.Subscribe.Provider.Redis.csproj" />
+    <ProjectReference Include="..\..\src\Naruto.Subscribe.Provider.RabbitMQ\Naruto.Subscribe.Provider.RabbitMQ.csproj" />
     <ProjectReference Include="..\..\src\Naruto.Subscribe\Naruto.Subscribe.csproj" />
   </ItemGroup>
 

@@ -3,15 +3,17 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.30413.136
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Naruto.Subscribe", "src\Naruto.Subscribe\Naruto.Subscribe.csproj", "{782E0C88-92E5-4B7C-9468-35B5DB8E09C4}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Naruto.Subscribe", "src\Naruto.Subscribe\Naruto.Subscribe.csproj", "{782E0C88-92E5-4B7C-9468-35B5DB8E09C4}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "test", "test", "{2FD9A95A-E866-4EE6-9554-77B56B3B77A4}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{B2AF806B-2085-4BD9-AC30-E20C87076BC6}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "test.api", "test\test.api\test.api.csproj", "{4E41F2F1-043A-441C-9D5F-ADB19DEA34C5}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "test.api", "test\test.api\test.api.csproj", "{4E41F2F1-043A-441C-9D5F-ADB19DEA34C5}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Naruto.Subscribe.Provider.Redis", "src\Naruto.Subscribe.Provider.Redis\Naruto.Subscribe.Provider.Redis.csproj", "{7E9469C6-93E8-4F98-8037-123CBD83B102}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Naruto.Subscribe.Provider.Redis", "src\Naruto.Subscribe.Provider.Redis\Naruto.Subscribe.Provider.Redis.csproj", "{7E9469C6-93E8-4F98-8037-123CBD83B102}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Naruto.Subscribe.Provider.RabbitMQ", "src\Naruto.Subscribe.Provider.RabbitMQ\Naruto.Subscribe.Provider.RabbitMQ.csproj", "{B2A97A0C-445D-426F-9CEF-A7244F80FDEF}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -31,6 +33,10 @@ Global
 		{7E9469C6-93E8-4F98-8037-123CBD83B102}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{7E9469C6-93E8-4F98-8037-123CBD83B102}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{7E9469C6-93E8-4F98-8037-123CBD83B102}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B2A97A0C-445D-426F-9CEF-A7244F80FDEF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B2A97A0C-445D-426F-9CEF-A7244F80FDEF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B2A97A0C-445D-426F-9CEF-A7244F80FDEF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B2A97A0C-445D-426F-9CEF-A7244F80FDEF}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -39,6 +45,7 @@ Global
 		{782E0C88-92E5-4B7C-9468-35B5DB8E09C4} = {B2AF806B-2085-4BD9-AC30-E20C87076BC6}
 		{4E41F2F1-043A-441C-9D5F-ADB19DEA34C5} = {2FD9A95A-E866-4EE6-9554-77B56B3B77A4}
 		{7E9469C6-93E8-4F98-8037-123CBD83B102} = {B2AF806B-2085-4BD9-AC30-E20C87076BC6}
+		{B2A97A0C-445D-426F-9CEF-A7244F80FDEF} = {B2AF806B-2085-4BD9-AC30-E20C87076BC6}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {56AD70C7-9A2D-42A7-9192-02DB05690933}

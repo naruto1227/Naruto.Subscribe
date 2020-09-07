@@ -5,28 +5,35 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Naruto.Subscribe;
 using Naruto.Subscribe.Extension;
 using Naruto.Subscribe.Interface;
-using Naruto.Subscribe.Provider.Redis;
+using Naruto.Subscribe.Provider.RabbitMQ;
 
 namespace test.api
 {
     public class Startup
     {
+        private readonly IConfiguration configuration;
+
+        public Startup(IConfiguration _configuration)
+        {
+            configuration = _configuration;
+        }
         // This method gets called by the runtime. Use this method to add services to the container.
         // For more information on how to configure your application, visit https://go.microsoft.com/fwlink/?LinkID=398940
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddRedisRepository(a =>
-            {
-                a.Connection = new string[] { "127.0.0.1" };
-            });
+            //services.AddRedisRepository(a =>
+            //{
+            //    a.Connection = new string[] { "127.0.0.1" };
+            //});
             services.AddSubscribeServices(typeof(Startup).Assembly);
-            services.AddRedisSubscribe();
-
+            //services.AddRedisSubscribe();
+            services.AddRabbitMQSubscribe(configuration.GetSection("mq"));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
