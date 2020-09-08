@@ -9,7 +9,7 @@ namespace Naruto.Subscribe.Provider.RabbitMQ.Interface
     /// <summary>
     /// mq的通道工厂
     /// </summary>
-    public interface INarutoChannelFactory : IDisposable
+    public interface INarutoChannelFactory 
     {
         IModel Get();
 

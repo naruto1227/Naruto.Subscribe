@@ -28,10 +28,5 @@ namespace Naruto.Subscribe.Provider.RabbitMQ.Internal
         }
 
 
-
-        public void Dispose()
-        {
-           // model?.Dispose();
-        }
     }
 }

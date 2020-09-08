@@ -22,20 +22,28 @@ namespace Naruto.Subscribe.Provider.RabbitMQ
         }
         public void Publish(string subscribeName, object msg = null)
         {
-            throw new NotImplementedException();
-        }
-
-        public async Task PublishAsync(string subscribeName, object msg = null)
-        {
             //创建一个信道
-            var channel = await narutoChannel.GetAsync();
+             var channel = narutoChannel.Get();
 
             channel.QueueDeclare(queue: subscribeName, durable: false, exclusive: false, autoDelete: false, arguments: null);
 
             // 构建byte消息数据包
             string message = msg != null ? msg.ToString() : "";
             var body = Encoding.UTF8.GetBytes(message);
-            logger.LogInformation("发送消息");
+            // 发送数据包
+            channel.BasicPublish(exchange: "fanout", routingKey: subscribeName, basicProperties: null, body: body);
+        }
+
+        public async Task PublishAsync(string subscribeName, object msg = null)
+        {
+            //创建一个信道
+             var channel = await narutoChannel.GetAsync();
+
+            channel.QueueDeclare(queue: subscribeName, durable: false, exclusive: false, autoDelete: false, arguments: null);
+
+            // 构建byte消息数据包
+            string message = msg != null ? msg.ToString() : "";
+            var body = Encoding.UTF8.GetBytes(message);
             // 发送数据包
             channel.BasicPublish(exchange: "fanout", routingKey: subscribeName, basicProperties: null, body: body);
         }

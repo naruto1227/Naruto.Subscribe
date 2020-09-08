@@ -23,7 +23,7 @@ namespace test.api
         [Subscribe("test2")]
         public async Task B(testDTO testDTO)
         {
-
+            logger.LogInformation("B");
         }
     }
     public class testDTO
