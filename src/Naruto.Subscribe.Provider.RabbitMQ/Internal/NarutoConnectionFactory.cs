@@ -5,6 +5,8 @@ using Naruto.Subscribe.Provider.RabbitMQ.Object;
 using RabbitMQ.Client;
 using System;
 using System.Collections.Generic;
+using System.Linq;
+using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -44,6 +46,10 @@ namespace Naruto.Subscribe.Provider.RabbitMQ.Internal
                 Port = optionsMonitor.CurrentValue.Port,
                 VirtualHost = "/",//虚拟主机
             };
+            if (optionsMonitor.CurrentValue.HostNames.Count == 1)
+            {
+                connectionFactory.HostName = optionsMonitor.CurrentValue.HostNames.FirstOrDefault();
+            }
         }
 
         public IConnection Get()
@@ -75,7 +81,15 @@ namespace Naruto.Subscribe.Provider.RabbitMQ.Internal
             {
                 lock (this)
                 {
-                    connection = connectionFactory.CreateConnection(optionsMonitor.CurrentValue.HostNames);
+                    var serviceName = Assembly.GetEntryAssembly()?.GetName().Name.ToLower();
+                    if (optionsMonitor.CurrentValue.HostNames.Count > 1)
+                    {
+                        connection = connectionFactory.CreateConnection(optionsMonitor.CurrentValue.HostNames, serviceName);
+                    }
+                    else
+                    {
+                        connection = connectionFactory.CreateConnection(serviceName);
+                    }
                 }
             }
             logger.LogInformation($"{(connection == null ? "获取连接失败" : "获取连接成功")}");
