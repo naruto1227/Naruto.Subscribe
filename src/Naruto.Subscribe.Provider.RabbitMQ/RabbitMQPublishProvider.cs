@@ -36,7 +36,7 @@ namespace Naruto.Subscribe.Provider.RabbitMQ
             string message = msg != null ? msg.ToJsonString() : "";
             var body = Encoding.UTF8.GetBytes(message);
             // 发送数据包
-            channel.BasicPublish(exchange: RabbitMQOption.ExchangeName, routingKey: subscribeName, basicProperties: null, body: body)
+            channel.BasicPublish(exchange: RabbitMQOption.ExchangeName, routingKey: subscribeName, basicProperties: null, body: body);
         }
 
         public async Task PublishAsync(string subscribeName, object msg = null)
