@@ -12,6 +12,7 @@ using Naruto.Subscribe;
 using Naruto.Subscribe.Extension;
 using Naruto.Subscribe.Interface;
 using Naruto.Subscribe.Provider.RabbitMQ;
+using Naruto.Subscribe.Provider.Redis;
 
 namespace test.api
 {
@@ -27,11 +28,12 @@ namespace test.api
         // For more information on how to configure your application, visit https://go.microsoft.com/fwlink/?LinkID=398940
         public void ConfigureServices(IServiceCollection services)
         {
+
+            services.AddSubscribeServices(typeof(Startup).Assembly);
             //services.AddRedisRepository(a =>
             //{
             //    a.Connection = new string[] { "127.0.0.1" };
             //});
-            services.AddSubscribeServices(typeof(Startup).Assembly);
             //services.AddRedisSubscribe();
             services.AddRabbitMQSubscribe(configuration.GetSection("mq"));
         }
