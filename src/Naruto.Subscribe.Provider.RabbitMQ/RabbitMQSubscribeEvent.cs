@@ -17,7 +17,7 @@ namespace Naruto.Subscribe.Provider.RabbitMQ
     /// <summary>
     /// rabbitmq消费者实现
     /// </summary>
-    public class RabbitMQSubscribeEvent : ISubscribeEvent
+    public class RabbitMQSubscribeEvent : ISubscribeEvent, IDisposable
     {
         private readonly ILogger logger;
 
@@ -45,10 +45,7 @@ namespace Naruto.Subscribe.Provider.RabbitMQ
             subscribeNames.CheckNull();
             //创建一个信道
             channel = await narutoChannelFactory.GetAsync();
-            //绑定交换机
-            channel.ExchangeDeclare(exchange: RabbitMQOption.ExchangeName, type: NarutoExchangeType.Topic, durable: true, autoDelete: false, arguments: null);
-            //绑定队列
-            channel.QueueDeclare(queue: RabbitMQOption.QueueName, durable: true, exclusive: false, autoDelete: false, arguments: null);
+          
             //设置绑定关系
             foreach (var subscribeName in subscribeNames)
             {
@@ -75,7 +72,7 @@ namespace Naruto.Subscribe.Provider.RabbitMQ
         /// </summary>
         /// <param name="model"></param>
         /// <param name="ea"></param>
-        private async void ReceivedMessage(object? model, BasicDeliverEventArgs ea)
+        private async void ReceivedMessage(object model, BasicDeliverEventArgs ea)
         {
             await subscribeHandler.HandlerAsync(ea.RoutingKey, Encoding.UTF8.GetString(ea.Body.ToArray()));
             //确认消费完此消息
@@ -89,6 +86,12 @@ namespace Naruto.Subscribe.Provider.RabbitMQ
         private void ShutdownEvent(object? model, ShutdownEventArgs shutdownEventArgs)
         {
             logger.LogWarning("ShutdownEvent:{shutdownEventArgs}", shutdownEventArgs.ToString());
+        }
+
+        public void Dispose()
+        {
+            channel?.Close();
+            channel?.Dispose();
         }
     }
 }
