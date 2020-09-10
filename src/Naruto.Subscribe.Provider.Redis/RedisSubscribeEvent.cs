@@ -2,6 +2,7 @@
 using Naruto.Redis;
 using Naruto.Subscribe.Extension;
 using Naruto.Subscribe.Interface;
+using StackExchange.Redis;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -40,18 +41,20 @@ namespace Naruto.Subscribe.Provider.Redis
         /// </summary>
         /// <param name="subscribeName"></param>
         /// <returns></returns>
-        public async Task SubscribeAsync(string subscribeName)
+        public async Task SubscribeAsync(List<string> subscribeNames)
         {
-            subscribeName.CheckNullOrEmpty();
-            logger.LogInformation("开始订阅[{subscribeName}]信息", subscribeName);
-
-            //订阅消息
-            await redis.Subscribe.SubscribeAsync(subscribeName, async (subscribeName, msg) =>
+            subscribeNames.CheckNull();
+            foreach (var subscribeName in subscribeNames)
             {
-                //处理消息
-                await subscribeHandler.HandlerAsync(subscribeName, msg);
-            });
-            logger.LogInformation("订阅成功[{subscribeName}]", subscribeName);
+                logger.LogInformation("开始订阅[{subscribeName}]信息", subscribeName);
+                //订阅消息
+                await redis.Subscribe.SubscribeAsync(subscribeName, async (subscribeName, msg) =>
+                {
+                    //处理消息
+                    await subscribeHandler.HandlerAsync(subscribeName, msg);
+                });
+                logger.LogInformation("订阅成功[{subscribeName}]", subscribeName);
+            }
         }
     }
 }

@@ -17,6 +17,6 @@ namespace Naruto.Subscribe.Interface
         /// </summary>
         /// <param name="subscribeName">订阅的名称</param>
         /// <returns></returns>
-        Task SubscribeAsync(string subscribeName);
+        Task SubscribeAsync(List<string> subscribeNames);
     }
 }
