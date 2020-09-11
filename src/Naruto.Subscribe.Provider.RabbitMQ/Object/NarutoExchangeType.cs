@@ -10,20 +10,24 @@ namespace Naruto.Subscribe.Provider.RabbitMQ.Object
     public class NarutoExchangeType
     {
         /// <summary>
-        /// 把所有发送到该Exchange的消息路由到所有与它绑定的Queue中。
+        /// 所有bind到此exchange的queue都可以接收消息
         /// </summary>
 
         public const string Fanout = "fanout";
         /// <summary>
         /// 它会把消息路由到那些binding key与routing key完全匹配的Queue中
+        /// 通过routingKey和exchange决定的那个唯一的queue可以接收消息
         /// </summary>
         public const string Direct = "direct";
         /// <summary>
-        /// 可以通过通配符满足一部分规则就可以传送
+        /// 所有符合routingKey(此时可以是一个表达式)的routingKey所bind的queue可以接收消息
         /// </summary>
 
         public const string Topic = "topic";
 
+        /// <summary>
+        /// 通过headers 来决定把消息发给哪些queue
+        /// </summary>
         public const string Headers = "headers";
     }
 }

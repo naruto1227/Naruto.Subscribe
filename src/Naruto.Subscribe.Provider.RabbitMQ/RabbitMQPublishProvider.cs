@@ -30,14 +30,18 @@ namespace Naruto.Subscribe.Provider.RabbitMQ
         {
             //创建一个信道
             using var channel = narutoChannel.Get();
+            logger.LogInformation("Publish:开始发布消息，subscribeName={subscribeName},msg={msg}", subscribeName, msg);
             channel.PublishMessage(msg, subscribeName);
+            logger.LogInformation("Publish:发布完成，subscribeName={subscribeName},msg={msg}", subscribeName, msg);
         }
 
         public async Task PublishAsync(string subscribeName, object msg = null)
         {
             //创建一个信道
             using var channel = await narutoChannel.GetAsync();
+            logger.LogInformation("Publish:开始发布消息，subscribeName={subscribeName},msg={msg}", subscribeName, msg);
             channel.PublishMessage(msg, subscribeName);
+            logger.LogInformation("Publish:发布完成，subscribeName={subscribeName},msg={msg}", subscribeName, msg);
         }
     }
 }
