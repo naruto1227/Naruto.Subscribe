@@ -20,6 +20,8 @@ namespace Naruto.Subscribe.Provider.RabbitMQ.Object
         public const string Direct = "direct";
         /// <summary>
         /// 所有符合routingKey(此时可以是一个表达式)的routingKey所bind的queue可以接收消息
+        /// .* 匹配一个词
+        /// .#匹配多个词
         /// </summary>
 
         public const string Topic = "topic";
