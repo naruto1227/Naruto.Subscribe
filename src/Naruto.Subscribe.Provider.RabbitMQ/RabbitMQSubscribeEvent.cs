@@ -45,7 +45,7 @@ namespace Naruto.Subscribe.Provider.RabbitMQ
             subscribeNames.CheckNull();
             //创建一个信道
             channel = await narutoChannelFactory.GetAsync();
-          
+
             //设置绑定关系
             foreach (var subscribeName in subscribeNames)
             {
@@ -79,11 +79,11 @@ namespace Naruto.Subscribe.Provider.RabbitMQ
             channel.BasicAck(ea.DeliveryTag, false);
         }
 
-        private void ConsumerCancelledEvent(object? model, ConsumerEventArgs consumerEventArgs)
+        private void ConsumerCancelledEvent(object model, ConsumerEventArgs consumerEventArgs)
         {
         }
 
-        private void ShutdownEvent(object? model, ShutdownEventArgs shutdownEventArgs)
+        private void ShutdownEvent(object model, ShutdownEventArgs shutdownEventArgs)
         {
             logger.LogWarning("ShutdownEvent:{shutdownEventArgs}", shutdownEventArgs.ToString());
         }

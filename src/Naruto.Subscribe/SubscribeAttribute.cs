@@ -6,14 +6,20 @@ using System.Text;
 namespace Naruto.Subscribe
 {
     /// <summary>
-    /// 订阅
+    /// 订阅属性
     /// </summary>
+    [AttributeUsage(AttributeTargets.Method)]
 
-    public class SubscribeAttribute : SubscribeTopicAttribute
+    public class SubscribeAttribute : Attribute
     {
-        public SubscribeAttribute(string name) : base(name)
-        {
+        /// <summary>
+        /// 订阅的名称
+        /// </summary>
+        public string Name { get; }
 
+        public SubscribeAttribute(string name)
+        {
+            Name = name;
         }
     }
 }
