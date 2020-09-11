@@ -10,13 +10,12 @@ namespace Naruto.Subscribe.Provider.RabbitMQ.Object
     public class NarutoExchangeType
     {
         /// <summary>
-        /// 所有bind到此exchange的queue都可以接收消息
+        /// 所有bind到此exchange的queue都可以接收消息， 无需匹配routing key
         /// </summary>
 
         public const string Fanout = "fanout";
         /// <summary>
-        /// 它会把消息路由到那些binding key与routing key完全匹配的Queue中
-        /// 通过routingKey和exchange决定的那个唯一的queue可以接收消息
+        /// 它会把消息路由到那些exchange与routing key完全匹配的Queue中
         /// </summary>
         public const string Direct = "direct";
         /// <summary>
