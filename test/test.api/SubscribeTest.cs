@@ -25,6 +25,11 @@ namespace test.api
         {
             logger.LogInformation("B");
         }
+        [Subscribe("test222")]
+        public async Task c(testDTO testDTO)
+        {
+            logger.LogInformation("C");
+        }
     }
     public class testDTO
     {

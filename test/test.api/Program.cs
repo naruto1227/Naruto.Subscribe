@@ -20,6 +20,10 @@ namespace test.api
             Host.CreateDefaultBuilder(args)
                 .ConfigureWebHostDefaults(webBuilder =>
                 {
+                    webBuilder.UseKestrel(opeion =>
+                    {
+                        opeion.ListenAnyIP(new Random().Next(5000, 6000));
+                    });
                     webBuilder.UseStartup<Startup>();
                 });
     }
