@@ -21,12 +21,29 @@ namespace Naruto.Subscribe.Provider.RabbitMQ
         /// <returns></returns>
         public static IServiceCollection AddRabbitMQSubscribe(this IServiceCollection services, IConfiguration option)
         {
+            services.AddMQServices();
+            services.Configure<NarutoRabbitMQOption>(option);
+            return services;
+        }
+
+        /// <summary>
+        /// 注入RabbitMQ订阅服务
+        /// </summary>
+        /// <param name="services"></param>
+        /// <returns></returns>
+        public static IServiceCollection AddRabbitMQSubscribe(this IServiceCollection services, Action<NarutoRabbitMQOption> option)
+        {
+            services.AddMQServices();
+            services.Configure(option);
+            return services;
+        }
+
+        private static void AddMQServices(this IServiceCollection services)
+        {
             services.TryAddSingleton<ISubscribeEvent, RabbitMQSubscribeEvent>();
             services.TryAddSingleton<INarutoPublish, RabbitMQPublishProvider>();
             services.AddSingleton<INarutoConnectionFactory, NarutoConnectionFactory>();
             services.AddSingleton<INarutoChannelFactory, NarutoChannelFactory>();
-            services.Configure<NarutoRabbitMQOption>(option);
-            return services;
         }
     }
 }
