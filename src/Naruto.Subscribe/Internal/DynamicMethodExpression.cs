@@ -12,7 +12,7 @@ using System.Threading.Tasks;
 
 namespace Naruto.Subscribe.Internal
 {
-    public interface IDynamicMethodExpression
+    public interface IDynamicMethodExpression : IDisposable
     {
         /// <summary>
         /// 执行动态方法
@@ -113,6 +113,11 @@ namespace Naruto.Subscribe.Internal
             exec.TryAdd(key, lambda.Compile());
 
             return exec[key].DynamicInvoke(service, parameterEntity) as Task;
+        }
+
+        public void Dispose()
+        {
+            exec?.Clear();
         }
     }
 }

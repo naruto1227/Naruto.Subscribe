@@ -1,4 +1,5 @@
 ﻿using Microsoft.Extensions.DependencyInjection.Extensions;
+using Naruto.Subscribe;
 using Naruto.Subscribe.Extension;
 using Naruto.Subscribe.Interface;
 using Naruto.Subscribe.Internal;
@@ -25,6 +26,7 @@ namespace Microsoft.Extensions.DependencyInjection
             services.AddSingleton<IMethodCache, MethodCache>();
             //设置订阅信息
             services.SetSubscribe(assemblies);
+            services.AddHostedService<EnableSubscribeHostServices>();
             return services;
         }
 
