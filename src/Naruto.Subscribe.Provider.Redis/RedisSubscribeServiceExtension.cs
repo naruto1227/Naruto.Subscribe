@@ -21,5 +21,15 @@ namespace Naruto.Subscribe.Provider.Redis
             services.TryAddSingleton<INarutoPublish, RedisPublishProvider>();
             return services;
         }
+        /// <summary>
+        /// 注入redis发布服务
+        /// </summary>
+        /// <param name="services"></param>
+        /// <returns></returns>
+        public static IServiceCollection AddRedisPublishServices(this IServiceCollection services)
+        {
+            services.TryAddSingleton<INarutoPublish, RedisPublishProvider>();
+            return services;
+        }
     }
 }
