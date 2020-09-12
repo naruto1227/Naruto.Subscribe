@@ -44,6 +44,7 @@ namespace Naruto.Subscribe.Provider.RabbitMQ.Internal
                 Password = optionsMonitor.CurrentValue.Password, //密码
                 UserName = optionsMonitor.CurrentValue.UserName,//用户名
                 Port = optionsMonitor.CurrentValue.Port,
+                AutomaticRecoveryEnabled = true,//启用连接重试
                 VirtualHost = "/",//虚拟主机
             };
             if (optionsMonitor.CurrentValue.HostNames.Count == 1)

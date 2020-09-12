@@ -32,14 +32,17 @@ namespace Naruto.Subscribe.Internal
     /// </summary>
     public class DynamicMethodExpression<SubscribeType> : IDynamicMethodExpression where SubscribeType : ISubscribe
     {
+        private readonly IMethodCache methodCache;
+
         /// <summary>
         /// 存储委托
         /// </summary>
         private static ConcurrentDictionary<string, Delegate> exec;
 
-        public DynamicMethodExpression()
+        public DynamicMethodExpression(IMethodCache _methodCache)
         {
             exec = new ConcurrentDictionary<string, Delegate>();
+            methodCache = _methodCache;
         }
 
         /// <summary>
@@ -73,7 +76,7 @@ namespace Naruto.Subscribe.Internal
         /// <param name="parameterType">参数类型</param>
         /// <param name="parameterEntity">方法的参数</param>
         /// <returns></returns>
-        private static Task Create(object service, string action, bool isParameter, Type parameterType, object parameterEntity)
+        private Task Create(object service, string action, bool isParameter, Type parameterType, object parameterEntity)
         {
             //定义输入参数
             var p1 = Expression.Parameter(service.GetType(), "service");
@@ -81,7 +84,11 @@ namespace Naruto.Subscribe.Internal
             var methodParameter = Expression.Parameter(!isParameter ? typeof(object) : parameterType, "methodParameter");
 
             //动态执行方法
-            var methods = MethodCache.Get(service.GetType(), action);
+            var methods = methodCache.Get(service.GetType(), action);
+            if (methods.method == null)
+            {
+                return default;
+            }
             var methodInfo = methods.method;
             //获取参数
             var parameters = methods.parameterInfos;

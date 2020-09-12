@@ -38,9 +38,8 @@ namespace Naruto.Subscribe.Provider.RabbitMQ.Internal
         private void SetChannel(IModel channel)
         {
             //绑定交换机
-            channel.ExchangeDeclare(exchange: RabbitMQOption.ExchangeName, type: ExchangeType.Topic, durable: true, autoDelete: false, arguments: null);
-            //绑定存储的消息队列
-            channel.QueueDeclare(queue: RabbitMQOption.QueueName, durable: true, exclusive: false, autoDelete: false, arguments: null);
+            channel.ExchangeDeclare(exchange: RabbitMQOption.ExchangeName, type: ExchangeType.Direct, durable: true, autoDelete: false, arguments: null);
+
         }
     }
 }

@@ -45,7 +45,8 @@ namespace Naruto.Subscribe.Provider.RabbitMQ
             subscribeNames.CheckNull();
             //创建一个信道
             channel = await narutoChannelFactory.GetAsync();
-
+            //绑定存储的消息队列
+            channel.QueueDeclare(queue: RabbitMQOption.QueueName, durable: true, exclusive: false, autoDelete: false, arguments: null);
             //设置绑定关系
             foreach (var subscribeName in subscribeNames)
             {

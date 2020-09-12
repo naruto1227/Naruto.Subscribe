@@ -22,6 +22,7 @@ namespace Microsoft.Extensions.DependencyInjection
             //注入服务
             services.AddSingleton(typeof(DynamicMethodExpression<>));
             services.AddSingleton<ISubscribeHandler, SubscribeHandler>();
+            services.AddSingleton<IMethodCache, MethodCache>();
             //设置订阅信息
             services.SetSubscribe(assemblies);
             return services;

@@ -17,10 +17,13 @@ namespace Naruto.Subscribe.Internal
         private readonly IServiceProvider serviceProvider;
 
         private readonly ILogger logger;
-        public SubscribeHandler(IServiceProvider _serviceProvider, ILogger<SubscribeHandler> _logger)
+        private readonly IMethodCache methodCache;
+
+        public SubscribeHandler(IServiceProvider _serviceProvider, ILogger<SubscribeHandler> _logger, IMethodCache _methodCache)
         {
             serviceProvider = _serviceProvider;
             logger = _logger;
+            methodCache = _methodCache;
         }
         /// <summary>
         /// 开始处理订阅所对应的方法
@@ -45,7 +48,14 @@ namespace Naruto.Subscribe.Internal
             var dynamicMethod = serviceProvider.GetRequiredService(typeof(DynamicMethodExpression<>).MakeGenericType(baseSubscribeType.ServiceType)) as IDynamicMethodExpression;
 
             //获取当前执行方法的参数
-            var paramters = MethodCache.Get(baseSubscribeType.ServiceType, baseSubscribeType.MethodName).parameterInfos;
+            var methods = methodCache.Get(baseSubscribeType.ServiceType, baseSubscribeType.MethodName);
+
+            if (methods.method == null)
+            {
+                return;
+            }
+            var paramters = methods.parameterInfos;
+
             //获取当前方法是否含有参数
             var isParamter = paramters != null && paramters.Count() > 0;
             //验证是否是有参的方法，当前默认只支持一个参数

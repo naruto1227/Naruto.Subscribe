@@ -1,4 +1,5 @@
 ﻿using Naruto.Subscribe.Extension;
+using Naruto.Subscribe.Interface;
 using Naruto.Subscribe.Object;
 using System;
 using System.Collections.Concurrent;
@@ -11,12 +12,22 @@ namespace Naruto.Subscribe.Internal
     /// <summary>
     /// 方法的缓存
     /// </summary>
-    public class MethodCache
+    public class MethodCache : IMethodCache
     {
         /// <summary>
         /// 缓存方法的信息
         /// </summary>
-        private static readonly ConcurrentDictionary<string, (MethodInfo method, ParameterInfo[] parameterInfos)> methods = new ConcurrentDictionary<string, (MethodInfo method, ParameterInfo[] parameterInfos)>();
+        private readonly ConcurrentDictionary<string, (MethodInfo method, ParameterInfo[] parameterInfos)> methods;
+
+        public MethodCache()
+        {
+            methods = new ConcurrentDictionary<string, (MethodInfo method, ParameterInfo[] parameterInfos)>();
+        }
+
+        public void Dispose()
+        {
+            methods?.Clear();
+        }
 
         /// <summary>
         /// 获取方法信息
@@ -24,7 +35,7 @@ namespace Naruto.Subscribe.Internal
         /// <param name="service"></param>
         /// <param name="action"></param>
         /// <returns></returns>
-        public static (MethodInfo method, ParameterInfo[] parameterInfos) Get(Type service, string action)
+        public (MethodInfo method, ParameterInfo[] parameterInfos) Get(Type service, string action)
         {
             service.CheckNull();
             action.CheckNullOrEmpty();
@@ -37,7 +48,7 @@ namespace Naruto.Subscribe.Internal
             var methodInfo = service.GetMethod(action, BindingFlags.Public | BindingFlags.Instance);
             if (methodInfo == null)
             {
-                throw new NotMethodException($"查找不到服务{service.Name}中的{action}方法");
+                return default;
             }
             methods.TryAdd(key, (methodInfo, methodInfo.GetParameters()));
             return (methodInfo, methodInfo.GetParameters());

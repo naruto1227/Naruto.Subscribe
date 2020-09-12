@@ -27,7 +27,7 @@ namespace Naruto.Subscribe.Internal
             var result = data.TryGetValue(name, out var type);
             if (!result)
             {
-                throw new InvalidOperationException("无法匹配当前订阅的信息");
+                return default;
             }
             return type;
         }
