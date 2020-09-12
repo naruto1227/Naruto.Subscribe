@@ -6,15 +6,12 @@
     <Description>基于rabbitmq的发布订阅模式</Description>
     <PackageProjectUrl>https://gitee.com/haiboi/naruto.-subscribe</PackageProjectUrl>
     <RepositoryUrl>https://gitee.com/haiboi/naruto.-subscribe</RepositoryUrl>
-    <Version>1.0.2</Version>
+    <Version>1.0.3</Version>
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="Naruto.Subscribe" Version="1.0.3" />
     <PackageReference Include="RabbitMQ.Client" Version="6.2.1" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <ProjectReference Include="..\Naruto.Subscribe\Naruto.Subscribe.csproj" />
   </ItemGroup>
 
 

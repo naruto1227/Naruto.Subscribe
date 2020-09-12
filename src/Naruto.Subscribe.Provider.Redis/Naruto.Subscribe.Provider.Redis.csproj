@@ -7,15 +7,12 @@
     <Description>基于redis的发布订阅</Description>
     <PackageProjectUrl>https://gitee.com/haiboi/naruto.-subscribe</PackageProjectUrl>
     <RepositoryUrl>https://gitee.com/haiboi/naruto.-subscribe</RepositoryUrl>
-    <Version>1.0.2</Version>
+    <Version>1.0.3</Version>
   </PropertyGroup>
 
   <ItemGroup>
     <PackageReference Include="Naruto.Redis" Version="1.0.1.3" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <ProjectReference Include="..\Naruto.Subscribe\Naruto.Subscribe.csproj" />
+    <PackageReference Include="Naruto.Subscribe" Version="1.0.3" />
   </ItemGroup>
 
 </Project>
