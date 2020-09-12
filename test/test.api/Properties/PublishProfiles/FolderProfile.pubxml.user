@@ -4,6 +4,6 @@ https://go.microsoft.com/fwlink/?LinkID=208121.
 -->
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
-    <_PublishTargetUrl>F:\我的\naruto.-subscribe\test\test.api\bin\Release\netcoreapp3.1\publish\</_PublishTargetUrl>
+    <_PublishTargetUrl>D:\自有项目\naruto.-subscribe\test\test.api\bin\Release\netcoreapp3.1\publish2</_PublishTargetUrl>
   </PropertyGroup>
 </Project>

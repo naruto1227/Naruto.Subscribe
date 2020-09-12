@@ -39,7 +39,7 @@ namespace test.api
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public async void Configure(IApplicationBuilder app, IWebHostEnvironment env)
+        public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
             if (env.IsDevelopment())
             {
@@ -72,7 +72,7 @@ namespace test.api
             {
             });
 
-            await app.EnableSubscribe();
+            //await app.EnableSubscribe();
 
             NarutoMessageAopEvent.RegisterPreHandlerEvent((subscribeName, msg) =>
             {

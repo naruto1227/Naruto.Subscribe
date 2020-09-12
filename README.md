@@ -11,7 +11,7 @@
 #### 安装教程
 1. 安装 <b>Naruto.Subscribe</b> 核心包
 2. 安装 <b>Naruto.Subscribe.Provider.Redis</b> ，基于redis的发布订阅
-3. 安装 <b>Naruto.Subscribe.Provider.RabbitMQ</b> ，基于RabbitMQ的发布订阅
+3. 安装 <b>Naruto.Subscribe.Provider.RabbitMQ</b> ，基于RabbitMQ的发布订阅,使用的是Direct 直连交换机
 #### 使用说明
 
 1.  当前框架 默认使用的redis的发布订阅，更多mq的订阅正在接入中

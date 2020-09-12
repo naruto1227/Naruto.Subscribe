@@ -15,11 +15,11 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Naruto.Subscribe.Provider.R
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Naruto.Subscribe.Provider.RabbitMQ", "src\Naruto.Subscribe.Provider.RabbitMQ\Naruto.Subscribe.Provider.RabbitMQ.csproj", "{B2A97A0C-445D-426F-9CEF-A7244F80FDEF}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ConsolePublish", "test\ConsolePublish\ConsolePublish.csproj", "{3881261F-9712-45BE-A37F-D0709DFCCB90}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ConsolePublish", "test\ConsolePublish\ConsolePublish.csproj", "{3881261F-9712-45BE-A37F-D0709DFCCB90}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ConsoleConsumer1", "test\ConsoleConsumer1\ConsoleConsumer1.csproj", "{D72ECF19-227E-4DEE-9464-636305CD779E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ConsoleConsumer1", "test\ConsoleConsumer1\ConsoleConsumer1.csproj", "{D72ECF19-227E-4DEE-9464-636305CD779E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ConsoleConsumers2", "test\ConsoleConsumers2\ConsoleConsumers2.csproj", "{BDA64E6F-BA79-47E6-B4EE-8A9938625DC7}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ConsoleConsumers2", "test\ConsoleConsumers2\ConsoleConsumers2.csproj", "{BDA64E6F-BA79-47E6-B4EE-8A9938625DC7}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
