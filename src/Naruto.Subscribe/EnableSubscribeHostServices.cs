@@ -8,6 +8,7 @@ using System.Linq;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
+using Microsoft.Extensions.DependencyInjection;
 
 namespace Naruto.Subscribe
 {
@@ -16,13 +17,13 @@ namespace Naruto.Subscribe
     /// </summary>
     public class EnableSubscribeHostServices : BackgroundService
     {
-        private readonly ISubscribeEvent subscribeEvent;
+        private readonly IServiceProvider serviceProvider;
 
         private readonly ILogger logger;
 
-        public EnableSubscribeHostServices(ISubscribeEvent _subscribeEvent, ILogger<EnableSubscribeHostServices> _logger)
+        public EnableSubscribeHostServices(IServiceProvider _serviceProvider, ILogger<EnableSubscribeHostServices> _logger)
         {
-            subscribeEvent = _subscribeEvent;
+            serviceProvider = _serviceProvider;
             logger = _logger;
         }
         protected override async Task ExecuteAsync(CancellationToken stoppingToken)
@@ -36,7 +37,7 @@ namespace Naruto.Subscribe
 
             if (subscribeNames != null && subscribeNames.Count() > 0)
             {
-                //订阅事件接口
+                var subscribeEvent = serviceProvider.GetService<ISubscribeEvent>();
                 if (subscribeEvent != null)
                 {
                     //处理订阅信息
@@ -44,7 +45,7 @@ namespace Naruto.Subscribe
                 }
                 else
                 {
-                    logger.LogWarning("当前未实现订阅接口，无法订阅消息");
+                    logger.LogWarning("当前未实现订阅服务");
                 }
             }
         }
