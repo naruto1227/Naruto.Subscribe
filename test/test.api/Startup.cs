@@ -28,14 +28,20 @@ namespace test.api
         // For more information on how to configure your application, visit https://go.microsoft.com/fwlink/?LinkID=398940
         public void ConfigureServices(IServiceCollection services)
         {
-
+            //注入订阅服务 如果只需要 发布服务，则可以不用注入此方法，注入对应的发布服务即可
             services.AddSubscribeServices(typeof(Startup).Assembly);
             //services.AddRedisRepository(a =>
             //{
             //    a.Connection = new string[] { "127.0.0.1" };
             //});
+            //注入redis订阅服务
             //services.AddRedisSubscribe();
+            //注入redis发布服务
+            //services.AddRedisPublishServices();
+            //注入mq订阅服务
             services.AddRabbitMQSubscribe(configuration.GetSection("mq"));
+            //注入mq发布服务
+            services.AddRabbitMQPublishServices();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

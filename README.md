@@ -20,6 +20,8 @@
 4. ![subscribe](/subscribe.png)
 5. 给需要订阅的方法标记<b>Subscribe</b>特性
 6. 使用<b>NarutoMessageAopEvent</b>，可以处理消息发送前后的aop事件
+7. #### 注入方法
+    ![use](/use.png)
 #### 参与贡献 
 
 1.  Fork 本仓库
